@@ -32,6 +32,6 @@ describe('Deck', function() {
 
     expect(deck.countCards).to.be.a('function');
     expect(deck.countCards()).to.equal(4);
-  })
+  });
 
 });
