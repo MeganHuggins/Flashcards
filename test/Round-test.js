@@ -64,10 +64,43 @@ describe('Round', function() {
     expect(round.incorrectGuesses).to.deep.equal([1]);
     expect(round.turns).to.equal(1);
     expect(response1).to.equal('incorrect!');
-    
+
     const response2 = round.takeTurn('gallbladder');
     expect(round.turns).to.equal(2);
     expect(response2).to.equal('correct!');
+  });
+
+  it('should have a method called calculatePercentCorrect that calculates and returns the percentage of correct guesses', function() {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = new Card(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = new Card(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
+    const deck = new Deck([card1, card2, card3]);
+    const round = new Round(deck);
+
+    expect(round.calculatePercentCorrect).to.be.a('function');
+
+    round.takeTurn('sea otter');
+    expect(round.calculatePercentCorrect()).to.equal(100);
+
+    round.takeTurn('spleen');
+    expect(round.calculatePercentCorrect()).to.equal(50);
+
+    round.takeTurn('playing with bubble wrap');
+    expect(round.calculatePercentCorrect()).to.equal(67);
+  });
+
+  it('should have a method named endRound that prints end message once the round has finished', function() {
+    const card1 = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = new Card(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = new Card(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
+    const deck = new Deck([card1, card2, card3]);
+    const round = new Round(deck);
+
+    round.takeTurn('sea otter');
+    round.takeTurn('spleen');
+    round.takeTurn('watching Netflix');
+    expect(round.takeTurn('watching Netflix')).to.equal('BOOM');
+    expect(round.endRound()).to.equal('BOOM')
   });
 
 });
