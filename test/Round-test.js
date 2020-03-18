@@ -97,10 +97,11 @@ describe('Round', function() {
     const round = new Round(deck);
 
     round.takeTurn('sea otter');
-    round.takeTurn('spleen');
-    round.takeTurn('watching Netflix');
-    expect(round.takeTurn('watching Netflix')).to.equal('BOOM');
-    expect(round.endRound()).to.equal('BOOM')
+    round.takeTurn('gallbladder');
+    expect(round.endRound()).to.equal('Round isn\'t over yet');
+
+    round.takeTurn('playing with bubble wrap');
+    expect(round.endRound()).to.equal(`** Round over! ** You answered 100% of the questions correctly!`)
   });
 
 });

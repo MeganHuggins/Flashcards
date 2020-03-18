@@ -8,11 +8,7 @@ class Round {
   };
 
   returnCurrentCard() {
-  if(this.turns >= this.deck.length){
-      this.endRound();
-    } else {
-      return this.deck.cards[this.turns];
-    };
+    return this.deck.cards[this.turns];
   };
 
   takeTurn(guess) {
@@ -32,7 +28,12 @@ class Round {
   };
 
   endRound(){
-    return 'BOOM';
+    if(this.turns >= this.deck.cards.length ){
+      const score = this.calculatePercentCorrect();
+      return `** Round over! ** You answered ${score}% of the questions correctly!`
+    } else {
+      return 'Round isn\'t over yet'
+    };
   }
 };
 
